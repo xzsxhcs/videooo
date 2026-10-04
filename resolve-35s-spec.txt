@@ -1,0 +1,2820 @@
+You are responsible for IMPLEMENTING, RENDERING, TESTING, REVIEWING, and POLISHING a complete 35-second experimental motion film.
+
+PROJECT:
+
+A SIGNAL WITH NO RESPONSE
+
+IMPORTANT:
+The creative direction has already been approved.
+
+You are NOT the creative director at this stage.
+
+Do not redesign the concept.
+Do not reinterpret the ending.
+Do not simplify subtle events because they appear visually small.
+Do not add extra visual ideas.
+Do not remove approved events.
+Do not replace restraint with spectacle.
+
+Your task is to faithfully translate the approved director's specification into a finished audiovisual work.
+
+After producing the first complete render, you MUST perform a second fidelity review against this specification.
+
+If the rendered result differs materially from the approved design, correct it and render again before final delivery.
+
+The specification below is authoritative.
+
+==================================================
+1. CREATIVE OBJECTIVE
+==================================================
+
+Create a 35.000-second dark experimental motion film about the difference between sending a signal and receiving confirmation.
+
+The film depicts:
+
+a nearly invisible night-sea horizon,
+
+a small distant sender point on that horizon,
+
+and a sequence of repeated pulses traveling along the horizon toward the right side of the frame.
+
+The sender behaves consistently.
+
+Subtle events begin appearing at the far-right end of the horizon.
+
+These events gradually suggest that something may be responding.
+
+The viewer learns the timing of the sender.
+
+Eventually the viewer begins waiting for the next transmission.
+
+At 30.0 seconds, the expected sixth normal pulse does not occur.
+
+Later, after a period of stillness and silence, one final extremely weak ghost pulse is transmitted.
+
+Nothing is confirmed.
+
+The final feeling should be:
+
+quiet,
+unresolved,
+slightly oppressive,
+and ambiguous.
+
+The viewer should not know whether:
+
+nothing responded,
+
+or
+
+the response was simply too weak to recognize.
+
+This is not a literal science-fiction narrative.
+
+Do not introduce characters, spaceships, antennas, machinery, interface graphics, or explanatory story elements.
+
+==================================================
+2. TECHNICAL MASTER SPECIFICATION
+==================================================
+
+Duration:
+
+35.000 seconds exactly
+
+Resolution:
+
+1920 × 1080
+
+Frame rate:
+
+24 fps
+
+Total rendered frames:
+
+840
+
+Format:
+
+16:9
+
+Shot structure:
+
+ONE continuous shot.
+
+No cuts.
+
+The film must be deterministic.
+
+Every frame should be reproducible from time/frame index.
+
+All procedural randomness must use a fixed seed.
+
+IMPORTANT TIMING NOTE:
+
+Some approved event times, such as 10.8 s or 15.6 s, do not land exactly on 24 fps frame boundaries.
+
+Do NOT alter the approved times merely to snap them to frames.
+
+Use continuous-time animation functions and sample them at each rendered frame time.
+
+Audio should also follow the approved times in seconds rather than being quantized to frame boundaries.
+
+==================================================
+3. REPOSITORY INSPECTION
+==================================================
+
+Before implementation:
+
+inspect the existing repository.
+
+Understand:
+
+- current rendering architecture
+- timeline system
+- scene abstraction
+- Canvas2D / WebGL usage
+- shader utilities
+- audio implementation
+- offline renderer
+- encoding pipeline
+- still rendering
+- contact-sheet support
+- existing post-processing
+- test infrastructure
+
+Reuse working infrastructure where appropriate.
+
+Do not rebuild the entire project merely for architectural elegance.
+
+The preview renderer and final offline renderer should use the same underlying scene logic wherever possible.
+
+Centralize important timing constants instead of scattering them throughout the code.
+
+==================================================
+4. FINAL DELIVERABLES
+==================================================
+
+Produce at minimum:
+
+1. final 35-second MP4 with stereo soundtrack
+2. final stereo WAV soundtrack
+3. representative contact sheet
+4. final-frame PNG
+5. individual still frames at required review timestamps
+6. README containing:
+   - build instructions
+   - preview instructions
+   - render instructions
+   - project structure
+   - important timeline constants
+   - audio architecture
+   - asset paths
+   - any temporary placeholders
+   - any unavoidable technical deviations
+
+Do not claim the project is fully compliant if a required source asset is still represented by a temporary placeholder.
+
+==================================================
+5. CORE VISUAL METAPHOR
+==================================================
+
+The horizon is also the signal baseline.
+
+At first, the viewer should read the image as a nearly empty night-sea landscape.
+
+Gradually, the behavior of the point and line reveals that the horizon also behaves like a communication channel.
+
+Do not explicitly explain this.
+
+The visual language is built almost entirely from:
+
+- darkness
+- one horizontal line
+- one sender point
+- repeated traveling pulses
+- subtle disturbances at the far-right side
+- one very small amount of warm color
+- one short line of text
+
+There must never be a second dominant visual motif.
+
+==================================================
+6. MASTER COMPOSITION
+==================================================
+
+Canvas:
+
+1920 × 1080
+
+Horizon / signal baseline:
+
+y = 63% of frame
+
+approximately:
+
+y = 680 px
+
+Sender point:
+
+x = 31%
+
+approximately:
+
+x = 595 px
+
+Pulse disappearance region:
+
+x = 90%
+
+approximately:
+
+x = 1728 px
+
+E-event region:
+
+approximately x = 94–95%
+
+The horizon should fade smoothly toward both frame edges.
+
+The composition should remain dominated by negative space.
+
+Do not center the sender.
+
+Do not move the horizon vertically.
+
+Do not add visible reference grids.
+
+==================================================
+7. BACKGROUND
+==================================================
+
+Required final source:
+
+one night-sea photograph OR one perfectly locked night-sea shot.
+
+Preferred minimum resolution:
+
+4K
+
+Required characteristics:
+
+- horizontal horizon
+- nearly black exposure
+- no people
+- no ships
+- no visible artificial lights
+- no strong stars
+- no dramatic waves
+- subtle thin haze
+- empty composition
+
+Post-process it approximately as follows:
+
+apparent brightness:
+
+6–9%
+
+color treatment:
+
+very dark blue-black
+
+soft blur:
+
+approximately 3 px
+
+Preserve only enough realism to prevent the film from becoming a pure shader demonstration.
+
+The background must remain visually subordinate.
+
+If an approved real night-sea asset is not yet present in the repository:
+
+create a clearly marked temporary placeholder layer containing:
+
+- near-black sea field
+- horizon gradient
+- subtle haze
+- monochrome grain
+
+Keep background loading isolated so a final real asset can replace the placeholder without changing the timeline or animation logic.
+
+Do not download arbitrary copyrighted imagery without permission.
+
+==================================================
+8. BACKGROUND COLOR SYSTEM
+==================================================
+
+Base:
+
+#040608
+
+Dark edge / vignette region:
+
+#020304
+
+Secondary slate support:
+
+#1C2A33
+
+Cold highlight:
+
+#E9EFEE
+
+Warm anomaly:
+
+#D8C7A0
+
+Forbidden saturated colors include:
+
+- saturated cyan
+- neon blue
+- magenta
+- purple
+- red
+- bright orange
+- matrix green
+
+The frame should remain overwhelmingly dark.
+
+Target:
+
+at least approximately 98.5% of the frame should remain in dark values.
+
+Pixels brighter than approximately 70% should never occupy more than 1% of the frame.
+
+==================================================
+9. HORIZON / SIGNAL LINE
+==================================================
+
+Line thickness:
+
+approximately 1.5 px
+
+Base brightness:
+
+very low
+
+Color:
+
+cold blue-gray
+
+Fade the line gently near the left and right edges.
+
+Continuous line brightness drift:
+
+±4%
+
+sinusoidal
+
+period:
+
+7.3 seconds
+
+This subtle drift remains throughout the film.
+
+Do not turn the line into:
+
+- a UI graph
+- an oscilloscope screen
+- a data chart
+- a grid
+- a HUD element
+
+==================================================
+10. SENDER POINT
+==================================================
+
+Position:
+
+x = 31%
+y = horizon
+
+Core radius:
+
+approximately 3 px
+
+Visual diameter:
+
+approximately 6 px
+
+Normal idle brightness:
+
+35%
+
+Late quiet-section idle brightness:
+
+25%
+
+Default glow radius:
+
+approximately 90 px
+
+Glow character:
+
+soft,
+Gaussian-like,
+low contrast.
+
+No:
+
+- starburst
+- lens flare
+- anamorphic streak
+- visible rays
+- flare ghosts
+
+The point should resemble a very distant light.
+
+==================================================
+11. FILM GRAIN AND TEXTURE
+==================================================
+
+Use subtle monochrome luminance grain.
+
+Amplitude:
+
+approximately 2.5%
+
+Temporal refresh:
+
+approximately 12 fps
+
+At 24 fps, this may mean one grain state remains for approximately two rendered frames.
+
+Use deterministic seeded noise.
+
+Do not use chromatic grain.
+
+Use grain/dithering to reduce visible gradient banding.
+
+Grain is texture, not a visible effect.
+
+Do not make it sparkle.
+
+==================================================
+12. DIGITAL EFFECT RULE
+==================================================
+
+There are ZERO digital glitch events in this film.
+
+Do NOT add:
+
+- frame tearing
+- RGB split
+- chromatic aberration
+- scan lines
+- CRT simulation
+- packet-loss graphics
+- signal corruption effects
+- compression glitch
+- HUD overlays
+- digital distortion bursts
+
+The abnormality comes from the events and from absence itself.
+
+==================================================
+13. CAMERA
+==================================================
+
+0.0–16.0 s:
+
+camera completely locked
+
+16.0–28.0 s:
+
+the ONLY camera move in the film
+
+slow push-in
+
+scale:
+
+1.000 → 1.030
+
+easing:
+
+easeInOutSine
+
+The move should be nearly imperceptible.
+
+Approved background parallax factor:
+
+approximately 1.018
+
+The photographic horizon and procedural signal baseline must remain visually aligned during the push.
+
+Implement the transform around the horizon if necessary so the background horizon does not drift away from y = 63%.
+
+28.0–35.0 s:
+
+camera absolutely frozen
+
+No:
+
+- shake
+- drift
+- handheld movement
+- backward move
+- rotation
+- breathing motion
+
+==================================================
+14. OPENING
+==================================================
+
+0.0–1.6 s
+
+Visual:
+
+pure or near-pure black.
+
+Only monochrome grain may be faintly present.
+
+No visible sender.
+
+No visible signal line.
+
+Sound:
+
+50 Hz room/electrical hum at approximately −40 dB relative to P1 reference.
+
+No signal tone.
+
+Emotional function:
+
+absence.
+
+--------------------------------------------------
+
+1.6–4.4 s
+
+The horizon slowly emerges.
+
+Horizon brightness:
+
+0 → approximately 8%
+
+A subtle haze band appears with it:
+
+approximately +6% local luminance.
+
+Camera remains locked.
+
+Sound:
+
+hum rises gradually toward approximately −36 dB.
+
+Very faint high-frequency air enters.
+
+--------------------------------------------------
+
+4.4–5.2 s
+
+Sender point appears over approximately:
+
+800 ms
+
+brightness:
+
+0 → 35%
+
+--------------------------------------------------
+
+5.2–6.0 s
+
+Hold.
+
+The sender is visible but does nothing.
+
+No transmission yet.
+
+==================================================
+15. NORMAL TRANSMISSION TIMING
+==================================================
+
+There are exactly FIVE normal transmissions.
+
+P1 = 6.0 s
+P2 = 10.8 s
+P3 = 15.6 s
+P4 = 20.4 s
+P5 = 25.2 s
+
+Nominal interval:
+
+4.8 seconds
+
+The expected next regular transmission would be:
+
+P6 = 30.0 s
+
+P6 DOES NOT OCCUR.
+
+Do not change these times.
+
+Do not gradually accelerate the sequence.
+
+Do not introduce timing jitter.
+
+==================================================
+16. NORMAL PULSE VISUAL BEHAVIOR
+==================================================
+
+At each transmission:
+
+the sender flashes.
+
+Flash attack:
+
+approximately 60 ms
+
+Use a soft fast rise, comparable to easeOutQuad.
+
+Then decay exponentially.
+
+Approximate decay time constant:
+
+τ ≈ 520 ms
+
+Return toward idle over approximately:
+
+1.5 s
+
+A traveling bump leaves the sender and moves right along the horizon.
+
+Propagation speed:
+
+405 px/s
+
+From sender to x = 90%:
+
+approximately 2.8 seconds
+
+Normal bump geometry:
+
+height:
+
+approximately 14 px
+
+width:
+
+approximately 70 px
+
+Shape:
+
+asymmetric
+
+- sharper leading edge
+- softer trailing edge
+- very shallow negative trough behind the positive bump
+
+Do not use a perfect sine wave.
+
+Do not make it look like a music visualizer.
+
+Amplitude decays exponentially during propagation.
+
+At x ≈ 90%:
+
+amplitude should be approximately 15% of initial amplitude.
+
+The visible traveling structure then fades over approximately:
+
+400 ms
+
+The section of line the pulse passes through temporarily gains approximately:
+
++10% line brightness
+
+This afterglow decays over approximately:
+
+1.5 seconds
+
+==================================================
+17. TRANSMISSION CONSISTENCY
+==================================================
+
+P1, P2, and P3 must be visually and sonically effectively identical.
+
+This teaches the viewer the pattern.
+
+Do NOT randomize:
+
+- pulse timing
+- propagation speed
+- pitch
+- waveform shape
+- direction
+- sender position
+
+P4 may differ only subtly:
+
+glow radius approximately:
+
+95 px
+
+audio level:
+
++1 dB relative to P1
+
+P5 may differ only subtly:
+
+glow radius approximately:
+
+105 px
+
+audio level:
+
++2 dB relative to P1
+
+Do not turn P4/P5 into obvious escalation effects.
+
+==================================================
+18. TEXT
+==================================================
+
+There is exactly ONE textual appearance in the film.
+
+Text:
+
+No confirmation.
+
+Timing:
+
+13.8 s:
+begin fade-in
+
+fade-in:
+
+900 ms
+
+approximately 14.7–17.2 s:
+hold
+
+17.2–18.0 s:
+fade-out
+
+No other text appears anywhere in the film.
+
+Typography:
+
+serif
+
+Light / approximately weight 300
+
+sentence case
+
+tracking:
+
+approximately +0.04em
+
+font size:
+
+approximately 22 px at 1080p
+
+IMPORTANT:
+
+Keep the approved approximately 22 px size.
+
+Do not silently increase it for readability.
+
+If it appears unusually small in review, report that observation but preserve the approved director's size unless explicitly authorized to change it.
+
+Position:
+
+left aligned
+
+x = 6.5%
+
+baseline y = 88%
+
+Never center it.
+
+Color:
+
+#E9EFEE
+
+maximum opacity:
+
+40%
+
+No:
+
+- glow
+- jitter
+- glitch
+- typewriter effect
+- character animation
+
+Only opacity animation.
+
+Use an open-source Light serif font if available.
+
+==================================================
+19. E1 — FIRST POSSIBLE EVIDENCE
+==================================================
+
+Timing:
+
+18.8–20.2 s
+
+Location:
+
+near x ≈ 94%
+
+approximately:
+
+x ≈ 1805 px
+
+Visual:
+
+a local segment of the line becomes slightly brighter.
+
+Width:
+
+approximately 240 px
+
+Base line brightness:
+
+approximately 8%
+
+Peak local brightness:
+
+approximately 16%
+
+No vertical displacement.
+
+No bump.
+
+No warm color.
+
+No new object.
+
+Envelope:
+
+18.8–19.4 s:
+rise over 600 ms
+
+19.4–20.2 s:
+fall over 800 ms
+
+The effect should be subtle enough that the viewer may question whether it happened.
+
+Sound:
+
+no explicit tone.
+
+Only raise the high-frequency air texture by approximately:
+
++1.5 dB
+
+Do not tightly synchronize this as a dramatic cue.
+
+==================================================
+20. E2 — FIRST WARM ANOMALY
+==================================================
+
+Timing:
+
+23.6–25.0 s
+
+Location:
+
+near x ≈ 94%
+
+Visual:
+
+a tiny stationary rounded bump.
+
+Height:
+
+approximately 2 px
+
+Width:
+
+approximately 60 px
+
+Color:
+
+#D8C7A0
+
+Peak brightness:
+
+approximately 14%
+
+Envelope:
+
+23.6–24.2 s:
+rise
+
+24.2–24.5 s:
+hold
+
+24.5–25.0 s:
+decay
+
+It does NOT move.
+
+This is the first warm color in the entire film.
+
+It should remain easy to miss.
+
+Sound:
+
+G4
+
+approximately:
+
+392 Hz
+
+level:
+
+approximately −54 dB relative to P1.
+
+Start it approximately 0.2 seconds after the E2 visual begins rather than perfectly synchronizing it.
+
+Keep it extremely subtle.
+
+It should function more as subconscious tonal pressure than as a clearly audible musical note.
+
+==================================================
+21. E3 — STRONGEST POSSIBLE EVIDENCE
+==================================================
+
+Timing:
+
+28.4–32.4 s
+
+Initial position:
+
+approximately x = 95%
+
+Color:
+
+#D8C7A0
+
+Height:
+
+approximately 3 px
+
+Brightness:
+
+approximately 22%
+
+28.4–28.9 s:
+
+fade in over approximately 500 ms.
+
+Then it moves LEFT.
+
+This direction is important.
+
+It appears to move toward the sender.
+
+Initial speed:
+
+approximately 130 px/s
+
+Final speed:
+
+approximately 35 px/s
+
+Use a linear deceleration over approximately:
+
+3.2 seconds
+
+Approximate displacement:
+
+264 px
+
+Approximate final position:
+
+x ≈ 81%
+
+At approximately:
+
+31.6 s
+
+the structure begins losing coherence.
+
+31.6–32.4 s:
+
+dissolve E3 into sparse tiny warm fragments / particles.
+
+This is the ONLY conventional particle-like visual event allowed besides film grain.
+
+The dissolution must NOT look explosive.
+
+No outward blast.
+
+No cinematic particle spray.
+
+No bright fragments.
+
+It should look like the structure quietly losing coherence.
+
+By 32.4 s:
+
+E3 is gone.
+
+==================================================
+22. E3 SOUND
+==================================================
+
+At approximately 28.4 s:
+
+introduce a very quiet G4 layer.
+
+Approximate level movement:
+
+−70 dB → −46 dB
+
+during the first portion of E3.
+
+29.0–29.8 s:
+
+let the G4 sink back into the ambient noise.
+
+After approximately 29.8 s:
+
+E3 continues moving visually,
+
+but there is no confirming foreground sound.
+
+The image implies something.
+
+The audio refuses to confirm it.
+
+==================================================
+23. QUIET SECTION
+==================================================
+
+The central quiet section begins approximately:
+
+29.0 s
+
+and extends to:
+
+33.2 s
+
+Camera:
+
+frozen
+
+No new dominant visual ideas.
+
+No text.
+
+No glitch.
+
+No new object.
+
+No strong brightness increase.
+
+Sender point:
+
+29.0–31.0 s
+
+idle brightness:
+
+35% → 25%
+
+After 31.0 s:
+
+hold at approximately 25%, except for the approved ghost-pulse flash later.
+
+Global image gain:
+
+29.0–30.5 s
+
+100% → 88%
+
+Then hold at 88% until the final fade.
+
+The horizon's subtle 7.3-second luminance drift continues.
+
+E3 is the only meaningful moving structure until it dissolves.
+
+==================================================
+24. THE MISSING P6 — MOST IMPORTANT MOMENT
+==================================================
+
+At exactly:
+
+30.0 seconds
+
+the learned 4.8-second pattern implies another normal pulse should occur.
+
+It does NOT occur.
+
+Within approximately:
+
+30.0 ± 0.6 seconds
+
+do NOT begin any new:
+
+- sender flash
+- normal transmission
+- sound event
+- light event
+- text
+- glitch
+- camera movement
+- new visual structure
+
+Do not mark the absence.
+
+Do not use a riser.
+
+Do not use a dramatic "pause" sound.
+
+Do not darken suddenly at 30.0.
+
+Do not create an impact.
+
+The viewer should notice the missing pulse because P1–P5 taught them the timing.
+
+The absence itself is the event.
+
+==================================================
+25. CAMERA / EXPOSURE DURING THE LATE SECTION
+==================================================
+
+28.0 s:
+
+the slow camera push finishes.
+
+From 28.0–35.0 s:
+
+absolute camera freeze.
+
+29.0–30.5 s:
+
+global visual gain decreases gradually to:
+
+88%
+
+Then remain there until the final fade.
+
+29.0–31.0 s:
+
+sender idle level decreases:
+
+35% → 25%
+
+No abrupt changes.
+
+==================================================
+26. GHOST PULSE — APPROVED FINAL EVENT
+==================================================
+
+IMPORTANT:
+
+The approved director's version DOES include a final ghost pulse.
+
+Do not remove it.
+
+Timing:
+
+33.2–34.4 s
+
+At:
+
+33.2 s
+
+the sender produces one extremely weak final transmission.
+
+This is NOT P6.
+
+It occurs after the expected P6 has already failed to appear.
+
+It should feel smaller, drier, and more fragile than the established normal signals.
+
+Sender flash:
+
+approximately to 50% brightness
+
+then decay back toward the late idle level.
+
+Do not make the flash larger than necessary.
+
+Ghost bump:
+
+height:
+
+approximately 3 px
+
+propagation speed:
+
+405 px/s
+
+It travels right.
+
+Unlike normal pulses, it fades before reaching the far side.
+
+It should disappear around:
+
+x ≈ 56%
+
+approximately:
+
+34.38 s
+
+This ghost pulse must be visually weak.
+
+At approximately t = 33.9 s:
+
+the bump may be around:
+
+x ≈ 46%
+
+and already nearly invisible.
+
+The emotional meaning is:
+
+the sender tries once more,
+
+very quietly.
+
+There is still no confirmed response.
+
+==================================================
+27. GHOST PULSE SOUND
+==================================================
+
+At:
+
+33.2 s
+
+play one extremely quiet dry G5 tone.
+
+Frequency:
+
+approximately 783.99 Hz
+
+Relative level:
+
+approximately −30 dB
+
+No reverb.
+
+No echo.
+
+No sub-bass.
+
+No ambience underneath.
+
+Main body:
+
+approximately 180 ms
+
+Natural decay:
+
+approximately 450 ms
+
+Stereo movement:
+
+very narrow and subtle
+
+approximately:
+
+pan −0.2 → +0.1
+
+By approximately:
+
+33.9 s
+
+the sound must be gone.
+
+33.9–35.0 s:
+
+absolute silence.
+
+==================================================
+28. ENDING
+==================================================
+
+32.4–33.2 s:
+
+visual:
+
+flat line,
+sender point,
+no E3,
+zero movement.
+
+camera frozen.
+
+Sound:
+
+absolute silence.
+
+This is the first fully silent late interval.
+
+--------------------------------------------------
+
+33.2–34.4 s:
+
+approved ghost pulse occurs.
+
+No other new element.
+
+--------------------------------------------------
+
+34.4–35.0 s:
+
+fade the entire image to pure black over:
+
+600 ms
+
+Sound:
+
+absolute silence during this fade.
+
+At exactly:
+
+35.0 s
+
+the frame is pure black.
+
+==================================================
+29. LIGHT AND WARM-COLOR RESTRICTION
+==================================================
+
+Warm color:
+
+#D8C7A0
+
+may appear ONLY during:
+
+E2
+and
+E3
+
+Total cumulative warm-event duration:
+
+no more than approximately 5.4 seconds
+
+Warm color may exist only in the far-right region:
+
+x ≥ approximately 81%
+
+The ghost pulse remains cold.
+
+The sender remains cold.
+
+==================================================
+30. PARTICLE RESTRICTION
+==================================================
+
+Do not create general particle systems.
+
+No:
+
+- dust field
+- sparks
+- star field
+- floating cinematic particles
+- particle tunnel
+- decorative particle noise
+
+Allowed exceptions:
+
+1. monochrome film grain
+2. E3 dissolution fragments from 31.6–32.4 s
+
+Nothing else.
+
+==================================================
+31. AUDIO MASTER REFERENCE
+==================================================
+
+Use P1 peak as the relative reference:
+
+P1 peak = 0 dB reference
+
+Suggested overall digital master reference:
+
+approximately −12 dBFS for P1 peak
+
+This is a practical target, not permission to compress away the dynamic range.
+
+Avoid clipping.
+
+Preserve the extremely quiet sections.
+
+Do NOT use aggressive loudness normalization.
+
+Do NOT raise the final silence or near-silence to make the soundtrack appear consistently loud.
+
+==================================================
+32. AMBIENT BED
+==================================================
+
+Core:
+
+50 Hz electrical / room hum
+
+Include subtle:
+
+150 Hz third harmonic
+
+Add:
+
+very faint high-frequency air above approximately 6 kHz
+
+The ambience should feel ambiguous:
+
+part electronic,
+part physical room,
+part distant environment.
+
+Approximate levels:
+
+0–6 s:
+−40 dB → −36 dB
+
+6–20 s:
+approximately −34 dB
+
+20–28.4 s:
+gradually thicken toward approximately −31 dB
+
+29.8–32.0 s:
+approximately −52 dB
+
+32.0–32.4 s:
+fade below approximately −80 dBFS
+
+32.4–33.2 s:
+absolute silence
+
+33.2–33.9 s:
+only the ghost G5 exists
+
+33.9–35.0 s:
+absolute silence
+
+Stereo width:
+
+opening:
+
+approximately 30%
+
+gradually widen to:
+
+approximately 60% near 25 s
+
+starting around 29 s:
+
+collapse toward near-mono
+
+Subtly link ambient amplitude to the horizon's 7.3-second luminance cycle:
+
+approximately ±1 dB
+
+This relationship should remain barely perceptible.
+
+==================================================
+33. NORMAL SIGNAL SOUND
+==================================================
+
+Signature frequency:
+
+G5
+
+approximately:
+
+783.99 Hz
+
+Main oscillator:
+
+clean sine wave
+
+A very subtle second harmonic is allowed.
+
+Attack:
+
+approximately 8 ms
+
+Main audible body:
+
+approximately 180 ms
+
+Decay:
+
+approximately 2.4 seconds
+
+P1–P3:
+
+same pitch
+same timbre
+same basic envelope
+
+P4:
+
+approximately +1 dB
+
+P5:
+
+approximately +2 dB
+
+Do not alter pitch.
+
+The sound should become recognizable through repetition.
+
+==================================================
+34. NORMAL SIGNAL REVERB
+==================================================
+
+Use a dark plate-like reverb.
+
+Pre-delay:
+
+approximately 90 ms
+
+Decay:
+
+approximately 5.5 seconds
+
+Low-pass reverb content around:
+
+4 kHz
+
+Avoid strong early reflections.
+
+Do not create audible repeated echoes.
+
+There must be NO delay effect.
+
+There must be NO discrete repeat that could be interpreted as a response.
+
+Approved wet/reverb progression:
+
+P1:
+70%
+
+P2:
+60%
+
+P3:
+50%
+
+P4:
+40%
+
+P5:
+25%
+
+Implement this in a technically appropriate way while preserving the audible result.
+
+A separate reverb-send architecture is acceptable, but do not change the intended amount or character.
+
+==================================================
+35. NORMAL SIGNAL STEREO MOTION
+==================================================
+
+As each normal pulse moves from left to right:
+
+move the perceived signal position approximately from:
+
+−0.35
+
+to:
+
++0.55
+
+Keep the motion restrained.
+
+Do not turn this into exaggerated binaural movement.
+
+==================================================
+36. SUB-BASS LAYER
+==================================================
+
+Frequency:
+
+34 Hz
+
+Start:
+
+17.0 s
+
+Beginning level:
+
+approximately −60 dB
+
+Gradually rise.
+
+By:
+
+26.6 s
+
+reach approximately:
+
+−27 dB
+
+Hold until:
+
+28.4 s
+
+28.4–29.0 s:
+
+remove it over approximately 600 ms.
+
+Do NOT add additional 68 Hz or 102 Hz harmonics unless they are explicitly present in the approved design.
+
+They are NOT part of this specification.
+
+Small-speaker perceptibility is instead supported by the approved 2–4 kHz atmospheric layer described below.
+
+==================================================
+37. SMALL-SPEAKER SUPPORT / AIR LAYER
+==================================================
+
+During approximately:
+
+20.0–28.4 s
+
+raise a broad atmospheric component around:
+
+2–4 kHz
+
+by approximately:
+
++3 dB
+
+At:
+
+28.4–29.0 s
+
+remove this raised 2–4 kHz layer together with the 34 Hz low-frequency pressure.
+
+The listener should perceive a sonic world suddenly losing density even when the 34 Hz fundamental is not reproduced well.
+
+Do not turn this layer into hiss that calls attention to itself.
+
+==================================================
+38. THE SONIC CLIFF
+==================================================
+
+28.4–29.0 s:
+
+over approximately 600 ms,
+
+remove:
+
+- the 34 Hz low-frequency pressure
+- the raised 2–4 kHz atmospheric density
+
+At the same time:
+
+E3 appears visually.
+
+Do NOT add an impact.
+
+Do NOT add a hit.
+
+Do NOT add a reverse sound.
+
+The event is a withdrawal of sound energy.
+
+This is one of the largest structural audio moments in the film.
+
+==================================================
+39. THREE TYPES OF SILENCE
+==================================================
+
+TYPE 1 — OPENING SILENCE
+
+0–6.0 s
+
+The room still exists.
+
+No signal has yet occurred.
+
+--------------------------------------------------
+
+TYPE 2 — WAITING NEAR-SILENCE
+
+29.8–32.0 s
+
+Only approximately −52 dB hum remains.
+
+At:
+
+30.0 s
+
+the expected P6 does not happen.
+
+No new sound occurs.
+
+--------------------------------------------------
+
+TYPE 3 — WORLD-ABSENT SILENCE
+
+32.4–33.2 s
+
+absolute silence
+
+and again:
+
+33.9–35.0 s
+
+absolute silence
+
+The room itself has disappeared.
+
+The approved ghost pulse exists only between these silent regions.
+
+==================================================
+40. COMPLETE APPROVED 35-SECOND VISUAL TIMELINE
+==================================================
+
+0.0–1.6
+Near-black with grain.
+No visible line or sender.
+
+1.6–4.4
+Horizon fades in to approximately 8%.
+Haze appears.
+
+4.4–5.2
+Sender fades in to 35%.
+
+5.2–6.0
+Hold.
+
+6.0
+P1.
+
+8.8
+P1 reaches x = 90% region.
+
+10.8
+P2.
+
+13.8
+"No confirmation." begins fading in.
+
+15.6
+P3.
+
+16.0
+Slow camera push begins.
+
+17.2
+Text begins fade-out.
+
+18.0
+Text gone.
+
+18.8–20.2
+E1.
+
+20.4
+P4.
+
+23.6–25.0
+E2.
+
+25.2
+P5.
+
+26.6
+Sub-bass reaches its strongest approved level.
+
+28.0
+P5 reaches far-right region.
+Camera push finishes.
+Camera freezes permanently.
+
+28.4
+E3 begins appearing.
+Sonic cliff begins.
+
+29.0
+Quiet section deepens.
+Sender brightness begins reducing.
+Global gain begins reducing.
+
+29.8
+Only very low room hum remains.
+
+30.0
+Expected P6 DOES NOT OCCUR.
+
+31.0
+Sender reaches approximately 25% idle brightness.
+
+31.6
+E3 begins dissolving.
+
+32.0
+Remaining room tone begins disappearing.
+
+32.4
+E3 gone.
+Absolute silence begins.
+No visual motion.
+
+33.2
+Ghost pulse begins.
+Very quiet dry G5.
+
+33.9
+Ghost sound is gone.
+Absolute silence resumes.
+
+34.38 approximately
+Ghost visual bump has faded before approximately x = 56%.
+
+34.4
+Final visual fade begins.
+
+35.0
+Pure black.
+End.
+
+==================================================
+41. COMPLETE APPROVED AUDIO TIMELINE
+==================================================
+
+0.0–1.6
+
+Ambient:
+50 Hz hum around −40 dB.
+
+No foreground signal.
+
+Stereo width approximately 30%.
+
+--------------------------------------------------
+
+1.6–4.4
+
+Hum rises toward −36 dB.
+
+High-frequency air slowly enters.
+
+--------------------------------------------------
+
+4.4–6.0
+
+Air may lift slightly during sender appearance.
+
+Before P1, settle back into room tone.
+
+--------------------------------------------------
+
+6.0
+
+P1.
+
+G5.
+
+Relative level:
+
+0 dB reference.
+
+Reverb:
+
+70%.
+
+Pan movement follows pulse:
+
+−0.35 → +0.55.
+
+--------------------------------------------------
+
+10.8
+
+P2.
+
+Same tone and envelope.
+
+Reverb:
+
+60%.
+
+--------------------------------------------------
+
+15.6
+
+P3.
+
+Same basic tone/envelope.
+
+Reverb:
+
+50%.
+
+17.0:
+
+34 Hz low-frequency pressure begins emerging from approximately −60 dB.
+
+--------------------------------------------------
+
+18.8–20.2
+
+E1.
+
+No explicit tonal event.
+
+Air layer only:
+
+approximately +1.5 dB.
+
+--------------------------------------------------
+
+20.4
+
+P4.
+
+approximately +1 dB relative to P1.
+
+Reverb:
+
+40%.
+
+--------------------------------------------------
+
+23.6–25.0
+
+E2.
+
+G4 approximately −54 dB.
+
+Begin roughly 0.2 s after visual onset.
+
+Do not tightly synchronize.
+
+--------------------------------------------------
+
+25.2
+
+P5.
+
+approximately +2 dB relative to P1.
+
+Reverb:
+
+25%.
+
+--------------------------------------------------
+
+26.6–28.4
+
+Strongest total sound density.
+
+Still restrained.
+
+No music.
+
+No impact.
+
+--------------------------------------------------
+
+28.4–29.0
+
+Remove low-frequency pressure and raised atmospheric density over approximately 600 ms.
+
+E3 G4 layer enters:
+
+approximately −70 dB → −46 dB.
+
+No impact.
+
+--------------------------------------------------
+
+29.0–29.8
+
+E3 G4 retreats into background.
+
+Ambient narrows and becomes much thinner.
+
+--------------------------------------------------
+
+29.8–32.0
+
+Only approximately −52 dB hum remains.
+
+30.0:
+
+NO new sound.
+
+--------------------------------------------------
+
+32.0–32.4
+
+Remaining room tone fades below approximately −80 dBFS.
+
+--------------------------------------------------
+
+32.4–33.2
+
+Absolute silence.
+
+--------------------------------------------------
+
+33.2
+
+Ghost G5:
+
+approximately −30 dB.
+
+Dry.
+
+No reverb.
+
+No ambience.
+
+--------------------------------------------------
+
+approximately 33.9
+
+Ghost sound finished.
+
+--------------------------------------------------
+
+33.9–35.0
+
+Absolute silence.
+
+==================================================
+42. EFFECT STACK
+==================================================
+
+Use approximately this visual stacking order:
+
+1. night-sea background
+2. haze band
+3. horizon / signal line
+4. normal pulse and pulse afterglow
+5. E1 / E2 / E3
+6. sender point and glow
+7. typography
+8. monochrome grain
+9. vignette
+10. global gain / final fade
+
+Do not reorder layers in a way that changes the intended visual hierarchy.
+
+==================================================
+43. MOTION RULES
+==================================================
+
+Default easing:
+
+easeInOutSine
+
+Exception:
+
+normal pulse propagation remains constant-speed linear movement.
+
+Pulse speed:
+
+405 px/s
+
+Pulse flash attack:
+
+60 ms
+
+Pulse exponential decay:
+
+τ ≈ 520 ms
+
+E1:
+
+600 ms rise
+800 ms fall
+
+E2:
+
+600 ms rise
+300 ms hold
+500 ms fall
+
+E3:
+
+500 ms appearance
+
+then:
+
+130 px/s → 35 px/s linear deceleration over 3.2 s
+
+31.6–32.4:
+
+dissolution
+
+Sender breathing:
+
+29.0–31.0:
+35% → 25%
+
+Global gain:
+
+29.0–30.5:
+100% → 88%
+
+Camera:
+
+16.0–28.0:
+1.000 → 1.030
+
+Ghost pulse:
+
+begins 33.2
+
+height approximately 3 px
+
+speed 405 px/s
+
+dies near 34.38 s
+
+Final fade:
+
+34.4–35.0
+
+600 ms
+
+==================================================
+44. HARD PROHIBITIONS
+==================================================
+
+Do not add:
+
+- HUDs
+- grids
+- scales
+- axes
+- radar graphics
+- sonar visuals
+- scanning overlays
+- CRT effects
+- RGB separation
+- frame tearing
+- glitch bursts
+- lens flares
+- starbursts
+- visible light rays
+- decorative particles
+- stars
+- spaceships
+- satellites
+- antennas
+- people
+- ships
+- machinery silhouettes
+- futuristic interface elements
+- dramatic camera movement
+- camera shake
+- whip transitions
+- music
+- drums
+- melody
+- trailer impacts
+- risers
+- cinematic booms
+- sonar "ping" clichés
+- submarine ambience clichés
+- echo delay
+- repeated signal echoes
+- inspirational ending text
+- second sentence of typography
+
+==================================================
+45. DIRECTOR NON-NEGOTIABLE RULES
+==================================================
+
+1.
+Only one dominant visual system exists:
+horizon + sender point + signal.
+
+2.
+E1/E2/E3 represent one escalating idea, not three separate effects.
+
+3.
+The sender's normal behavior remains consistent.
+
+4.
+P1–P3 are effectively identical.
+
+5.
+Normal pulse interval is 4.8 seconds.
+
+6.
+P6 at 30.0 seconds is absent.
+
+7.
+Do not emphasize the missing P6 with an effect.
+
+8.
+There are zero digital glitch events.
+
+9.
+There are no audible echoes or delays.
+
+10.
+Warm #D8C7A0 appears only in E2/E3.
+
+11.
+The camera moves only from 16.0–28.0 s.
+
+12.
+The camera is perfectly frozen after 28.0 s.
+
+13.
+29.0–33.2 s must contain no unnecessary new visual ideas.
+
+14.
+At 30.0 ±0.6 s, no new event may begin.
+
+15.
+Text appears only once.
+
+16.
+The approved text size is approximately 22 px.
+
+17.
+32.4–33.2 s is absolute silence.
+
+18.
+The ghost pulse at 33.2 s MUST remain.
+
+19.
+The ghost pulse is much weaker than a normal pulse.
+
+20.
+The ghost pulse has no reverb and no low-frequency support.
+
+21.
+33.9–35.0 s is absolute silence.
+
+22.
+Final visual fade is silent.
+
+23.
+The final frame is pure black.
+
+24.
+If a section feels empty, do not automatically fill it.
+The emptiness is intentional.
+
+==================================================
+46. IMPLEMENTATION ARCHITECTURE
+==================================================
+
+Keep all important timing constants centralized.
+
+At minimum define explicit constants for:
+
+- film duration
+- frame rate
+- resolution
+- horizon location
+- sender location
+- P1
+- P2
+- P3
+- P4
+- P5
+- missing P6
+- text timing
+- E1 timing
+- E2 timing
+- E3 timing
+- camera timing
+- exposure timing
+- room-tone fade
+- ghost timing
+- final fade
+
+Prefer reusable deterministic helpers for:
+
+- easing
+- pulse shape
+- pulse propagation
+- pulse decay
+- line afterglow
+- Gaussian glow
+- grain
+- text opacity
+- audio envelope
+- panning
+- reverb automation
+- ambience gain
+- low-frequency gain
+- global exposure
+
+Avoid magic numbers duplicated across multiple files.
+
+==================================================
+47. AUDIO IMPLEMENTATION
+==================================================
+
+Prefer procedural synthesis for:
+
+- G5 signal
+- G4 anomaly tones
+- 34 Hz sub-bass
+- 50 Hz room hum
+- 150 Hz harmonic
+- high-frequency atmospheric layer
+
+This ensures exact timing.
+
+Use stereo output.
+
+Preserve all intentional quiet sections.
+
+The soundtrack must last exactly:
+
+35.000 seconds
+
+Do not trim the late silence.
+
+Do not normalize away the dynamics.
+
+Do not let encoder padding create audible material after the intended ending.
+
+==================================================
+48. ASSET REQUIREMENTS
+==================================================
+
+REQUIRED FINAL VISUAL ASSET:
+
+one 4K-or-better night-sea still OR perfectly locked night-sea shot.
+
+REQUIRED CHARACTERISTICS:
+
+- nearly black
+- flat horizon
+- no people
+- no boats
+- no visible artificial lights
+- subtle haze
+- minimal detail
+
+REQUIRED TYPE ASSET:
+
+one open-source Light serif font.
+
+OPTIONAL:
+
+dark 16 mm grain scan
+
+but procedural grain is acceptable.
+
+OPTIONAL:
+
+plate-reverb impulse response
+
+but algorithmic reverb is acceptable.
+
+All tones may be synthesized.
+
+==================================================
+49. FIRST IMPLEMENTATION PASS
+==================================================
+
+Build the complete timing structure before polishing.
+
+Implement:
+
+- background
+- horizon
+- sender
+- P1–P5
+- missing P6
+- text
+- camera move
+- E1
+- E2
+- E3
+- ghost pulse
+- final fade
+- base audio
+- exact silence windows
+
+Render the entire 35-second piece.
+
+Do not spend excessive time polishing a single shot before the complete timeline exists.
+
+==================================================
+50. SECOND PASS — MOTION AND SOUND
+==================================================
+
+Tune:
+
+- pulse geometry
+- pulse decay
+- line afterglow
+- sender glow
+- E1 subtlety
+- E2 visibility
+- E3 movement
+- E3 dissolution
+- camera push
+- room-tone density
+- G5 recognizability
+- reverb progression
+- 34 Hz pressure
+- 28.4 s sonic cliff
+- 30.0 s absence
+- ghost weakness
+- silence
+
+Do not increase effect intensity merely to make changes more obvious.
+
+==================================================
+51. THIRD PASS — FINISH
+==================================================
+
+Add and tune:
+
+- restrained bloom
+- haze
+- monochrome grain
+- dithering
+- vignette
+- global exposure
+- final fade
+- final audio balance
+
+Avoid turning finishing effects into visible stylistic gimmicks.
+
+==================================================
+52. REQUIRED REVIEW STILLS
+==================================================
+
+Render still frames at least at:
+
+3.0 s
+
+6.4 s
+
+19.4 s
+
+23.9 s
+
+25.4 s
+
+28.8 s
+
+30.0 s
+
+32.8 s
+
+33.9 s
+
+34.6 s
+
+35.0 s
+
+Create a contact sheet.
+
+Important expectations:
+
+3.0 s:
+almost empty horizon
+
+6.4 s:
+first transmission visible
+
+19.4 s:
+E1 barely readable
+
+23.9 s:
+first warm anomaly
+
+30.0 s:
+the most important frame should look almost uneventful
+
+32.8 s:
+still line and point, no E3, absolute silence
+
+33.9 s:
+extremely weak ghost pulse visible
+
+35.0 s:
+pure black
+
+==================================================
+53. TECHNICAL VALIDATION
+==================================================
+
+Verify:
+
+1. final duration = 35.000 s
+
+2. resolution = 1920 × 1080
+
+3. frame rate = 24 fps
+
+4. frame count = 840
+
+5. single continuous shot
+
+6. P1 timing = 6.0 s
+
+7. P2 timing = 10.8 s
+
+8. P3 timing = 15.6 s
+
+9. P4 timing = 20.4 s
+
+10. P5 timing = 25.2 s
+
+11. no normal P6 occurs at 30.0 s
+
+12. no new event begins within 30.0 ±0.6 s
+
+13. E1 timing = 18.8–20.2 s
+
+14. E2 timing = 23.6–25.0 s
+
+15. E3 timing = 28.4–32.4 s
+
+16. E3 begins dissolution around 31.6 s
+
+17. E3 is gone by 32.4 s
+
+18. only one text string exists
+
+19. text = "No confirmation."
+
+20. text is gone by 18.0 s
+
+21. camera begins moving only at 16.0 s
+
+22. camera stops completely by 28.0 s
+
+23. warm color appears only in E2/E3
+
+24. zero digital glitch events exist
+
+25. absolute silence exists from 32.4–33.2 s
+
+26. ghost pulse begins around 33.2 s
+
+27. ghost audio is dry and approximately −30 dB relative to P1
+
+28. ghost audio ends by approximately 33.9 s
+
+29. absolute silence exists from 33.9–35.0 s
+
+30. visual fade begins at 34.4 s
+
+31. final frame is pure black
+
+32. final MP4 decodes correctly
+
+33. final WAV duration matches the film
+
+34. no NaN, invalid shader, dropped render, or frame-generation errors occur
+
+==================================================
+54. AUDIO REVIEW
+==================================================
+
+Review the final soundtrack on:
+
+- headphones
+- laptop speakers
+- small-speaker / phone-like playback
+
+Check:
+
+- G5 is recognizable but does not sound like cliché submarine sonar
+- P1–P3 sound consistent
+- P4/P5 changes remain subtle
+- no reverb tail sounds like a response
+- E2 G4 remains nearly subliminal
+- E3 sound disappears before the visual event finishes
+- the 28.4–29.0 sonic withdrawal is perceptible without becoming a dramatic effect
+- 30.0 contains no new sound
+- 32.4–33.2 is genuinely silent
+- ghost G5 is much smaller and completely dry
+- 33.9–35.0 is genuinely silent
+
+Do NOT add unapproved bass harmonics merely to improve phone playback.
+
+The approved design uses the 2–4 kHz atmospheric withdrawal for small-speaker support.
+
+==================================================
+55. REQUIRED POST-RENDER FIDELITY AUDIT
+==================================================
+
+THIS STEP IS MANDATORY.
+
+After producing the first complete render:
+
+do not immediately deliver it.
+
+Perform a deliberate comparison between the actual rendered result and this approved specification.
+
+Create an internal checklist covering at least:
+
+A. TIMING
+
+- all five normal pulses
+- text
+- E1
+- E2
+- E3
+- camera movement
+- missing P6
+- silence windows
+- ghost pulse
+- final fade
+
+B. COMPOSITION
+
+- horizon remains at y = 63%
+- sender remains at x = 31%
+- background horizon remains aligned with signal baseline
+- negative space remains dominant
+- no unintended centered composition
+
+C. COLOR
+
+- cold palette dominates
+- warm color exists only in E2/E3
+- warm events remain subtle
+- ghost remains cold
+
+D. MOTION
+
+- P1–P3 look effectively identical
+- camera movement remains nearly invisible
+- E3 moves left and slows correctly
+- nothing unexpected moves during still sections
+
+E. SOUND
+
+- signal pitch remains G5
+- no audible echo/delay
+- P1–P5 reverb progression follows specification
+- 34 Hz pressure appears and disappears at the approved times
+- 30.0 remains empty
+- ghost exists at 33.2
+- ghost has no reverb
+- final silence remains intact
+
+F. TYPOGRAPHY
+
+- exactly one sentence
+- exact copy
+- approved timing
+- serif Light
+- approximately 22 px
+- left aligned
+- low opacity
+- no extra text
+
+G. PROHIBITED ELEMENTS
+
+Confirm that none of the following accidentally entered the render:
+
+- HUD
+- scan lines
+- glitch
+- RGB split
+- flare
+- extra particles
+- stars
+- extra text
+- dramatic impact
+- music
+- extra transmission
+- unapproved color
+
+==================================================
+56. FIDELITY CORRECTION REQUIREMENT
+==================================================
+
+If the first full render differs materially from the approved design:
+
+FIX IT.
+
+Examples:
+
+If E1 reads too strongly:
+reduce it.
+
+If E2 feels like an obvious response:
+reduce it.
+
+If E3 looks like a definite answer:
+make it more ambiguous.
+
+If the camera move is noticeable as a camera move:
+reduce its perceptual prominence while keeping the approved 1.000→1.030 transform.
+
+If the 30.0 s absence does not register:
+do NOT add an effect.
+Instead verify that P1–P5 have taught the 4.8-second pattern clearly enough.
+
+If the ghost pulse feels like a climax:
+reduce it.
+
+If the soundtrack feels musical:
+remove musical qualities.
+
+If the G5 tone sounds like conventional sonar:
+refine the timbre/reverb while preserving the approved pitch and timing.
+
+If the background becomes visually dominant:
+darken or soften it.
+
+If the text becomes a graphic focal point:
+reduce its visual prominence while preserving the approved typography specification.
+
+If silence is not actually silent:
+correct the audio.
+
+After corrections:
+
+render the complete film again.
+
+Repeat the audit until no substantial mismatch remains.
+
+==================================================
+57. DO NOT "FIX" APPROVED STRANGENESS
+==================================================
+
+Several choices may initially feel unusual.
+
+They are intentional.
+
+Do not automatically change:
+
+- the very small typography
+- the extremely dark exposure
+- the low visual density
+- the long quiet intervals
+- the missing P6
+- the absence of digital glitch
+- the lack of a conventional climax
+- the ghost pulse after the missing P6
+- the final silent fade
+
+Do not assume these are mistakes.
+
+They are part of the approved design.
+
+==================================================
+58. FINAL EMOTIONAL TARGET
+==================================================
+
+When the screen reaches black, the viewer should feel a quiet pressure with no clear exit.
+
+The film must not prove:
+
+"No one answered."
+
+It should only prove:
+
+"No confirmation arrived."
+
+The audience should remain uncertain whether:
+
+nothing responded,
+
+or
+
+something did respond,
+
+but too weakly to become certainty.
+
+The final ghost pulse means:
+
+the sender has not received confirmation,
+
+but has not entirely stopped trying.
+
+Do not resolve that ambiguity.
+
+==================================================
+59. FINAL DELIVERY CONDITION
+==================================================
+
+Do not stop at a prototype unless a genuine technical blocker makes completion impossible.
+
+The task is complete only after:
+
+1. the full 35-second film is implemented
+2. the soundtrack is implemented
+3. the film is rendered
+4. the render is visually inspected
+5. the soundtrack is reviewed
+6. the fidelity audit is completed
+7. material deviations are corrected
+8. the corrected film is rendered again if necessary
+9. final deliverables are exported
+10. README documents the implementation and any remaining limitations
+
+The final result should feel restrained enough that a technically impressive implementation is almost invisible.
+
+The engineering should serve the design.
+
+Do not allow the engineering to become the subject of the film.
